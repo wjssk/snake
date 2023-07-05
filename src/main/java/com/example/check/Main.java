@@ -101,11 +101,12 @@ public class Main extends Application {
             this.gc.fillText("Game Over", WIDTH/4.5, HEIGHT/2);
             if(!playAgainAdded) {
                 addPlayAgainButton();
-                playAgainAdded = true;
+            } else {
+                playAgain.setVisible(true);
             }
             return;
         }
-        ((Group) gc.getCanvas().getParent()).getChildren().remove(playAgain);
+
         drawBackground(this.gc);
         drawFood(this.gc);
         drawSnake((this.gc));
@@ -141,6 +142,7 @@ public class Main extends Application {
         playAgain.setTranslateY(HEIGHT/2);
         playAgain.setOnAction(e -> restartGame());
         ((Group) gc.getCanvas().getParent()).getChildren().add(playAgain);
+        playAgainAdded = true;
     }
 
     private void drawBackground(GraphicsContext gc) {
@@ -240,6 +242,7 @@ public class Main extends Application {
         }
         snakeHead = snakeBody.get(0);
         generateFood();
+        playAgain.setVisible(false);
     }
 
 
