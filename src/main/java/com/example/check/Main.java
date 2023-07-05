@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.awt.Point;
@@ -14,8 +15,8 @@ import java.util.List;
 
 public class Main extends Application {
 
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 800;
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 600;
     private static final int ROWS = 20;
     private static final int COLUMNS = 20;
     private static final int SQUARE_SIZE = WIDTH / ROWS;
@@ -46,6 +47,26 @@ public class Main extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        stage.setResizable(false);
+        gc = canvas.getGraphicsContext2D();
+        run();
+    }
+
+    private void run() {
+        drawBackground(this.gc);
+    }
+
+    private void drawBackground(GraphicsContext gc) {
+        for(int i = 0; i < ROWS; i++) {
+            for(int j = 0; j < COLUMNS; j++) {
+                if((i + j) % 2 == 0) {
+                    gc.setFill(Color.web("ffb8da"));
+                } else {
+                    gc.setFill(Color.web("fca4d0"));
+                }
+                gc.fillRect(i * SQUARE_SIZE, j * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+            }
+        }
     }
 
     public static void main(String[] args) {
